@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: function-
+  labels:
+    app: serverless
+    env: function
+spec:
+  containers:
+    - name: function-
+      image: template-image::latest
+      # workingDir: /home/os/Desktop/working
+      ports:
+        - name: d
+          containerPort: 9090
+          protocol: TCP
+      resources:
+        limits:
+          cpu: 1.00
+          memory: 512MB
+        requests:
+          cpu: 1.00
+          memory: 512MB

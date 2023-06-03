@@ -1,0 +1,49 @@
+# extend
+apiVersion: v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: auto2
+targetKind: pod
+minReplicas: 1
+maxReplicas: 5
+metrics:
+  resource:
+    - name: cpu
+      min: 1%
+      max: 10%
+    - name: memory
+      min: 1MB
+      max: 128MB
+label:
+  app: auto2
+  env: product
+spec:
+  containers:
+    - name: busy1
+      image: 7143192/auto1:latest # an endless loop function image.
+      command:
+      args:
+      workingDir: /home/os/Desktop/working
+      volumeMounts:
+        - name: cc
+          mountPath: ccc
+
+      ports:
+        - name: d
+          containerPort: 99
+          # hostPort: 10099
+          protocol: TCP
+
+      # memory format: xxxKB / xxxMB / xxxGB
+      # mini limit for memory is 4MB.
+      resources:
+        limits:
+          cpu: 500m
+          memory: 64MB
+        requests:
+          cpu: 500m
+          memory: 64MB
+
+  volumes:
+    - name: v1
+      hostPath: /home/os/Desktop/volume2

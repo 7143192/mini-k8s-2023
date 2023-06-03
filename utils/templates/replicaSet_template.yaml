@@ -1,0 +1,56 @@
+apiVersion: v1
+kind: ReplicaSet
+metadata:
+  name: rs-example
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: testReplicaSet
+        env: default
+    spec:
+      containers:
+        - name: aaa
+          image: busybox:latest
+          command:
+          args:
+          workingDir: /home/os/Desktop/working
+          volumeMounts:
+            - name: cc
+              mountPath: ccc
+          ports:
+            - name: d
+              containerPort: 90
+              # hostPort: 10090
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 100m
+              memory: 64MB
+            requests:
+              cpu: 100m
+              memory: 64MB
+        - name: bbb
+          image: busybox:latest
+          command:
+          args:
+          workingDir: /home/os/Desktop/working1
+          volumeMounts:
+            - name: cc
+              mountPath: ccc
+          ports:
+            - name: d
+              containerPort: 100
+              # hostPort: 7070
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 100m
+              memory: 64MB
+            requests:
+              cpu: 100m
+              memory: 64MB
+      volumes:
+        - name: v0
+          hostPath: /home/os/Desktop/volume1

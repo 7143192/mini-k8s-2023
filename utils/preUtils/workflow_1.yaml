@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: WorkFlow
+name: workflow-example
+start: function_demo_3
+
+tasks:
+  - name: function_demo_3
+    params:
+      - name: x
+        kind: VAR
+
+  - name: print_high
+    params:
+      - name: x
+        kind: VAR
+
+  - name : print_low
+    params:
+      - name: x
+        kind: VAR
+
+choices:
+  - name: judge1
+    condition:
+      L:
+        name: x
+        kind: VAR
+      R:
+        name: 666
+        kind: CONST
+      symbol: LARGER
+    true: judge2
+    false: print_low
+
+  - name: judge2
+    condition:
+      L:
+        name: 19980619
+        kind: CONST
+      R:
+        name: x
+        kind: VAR
+      symbol: LESS-EQUAL
+    true: print_high
+    false: print_low
+
+relationships:
+  - L: function_demo_3
+    R: judge1

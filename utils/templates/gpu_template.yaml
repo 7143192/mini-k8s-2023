@@ -1,0 +1,16 @@
+name: job1
+kind: GPUJob
+sourcePath: /home/os/Desktop/merge/mini-k8s-2023/utils/gpuJobs/matrixAdd.cu
+compilePath: /home/os/Desktop/merge/mini-k8s-2023/utils/gpuJobs/Makefile
+resultPath: /home/os/Desktop/merge/mini-k8s-2023/utils/gpuJobs/
+imageName: matrixAdd
+slurmConfig:
+  jobName: matrixAdd
+  partition: dgx2
+  NTaskPerNode: 1
+  nodeNum: 1
+  GPUNum: 1
+  coreNum: 4
+  CPUsPerTask: 16
+  output: result.out
+  error: result.err

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Node
+metadata:
+  # character "/" is not allowed in the metadata.Name !!!
+  # but character "_", "-" should be allowed.
+  name: node3
+  label: node3
+  port: 9002
+  ip: 127.0.0.1
+  selector:
+    gpu: nvidia

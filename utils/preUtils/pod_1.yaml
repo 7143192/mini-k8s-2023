@@ -1,0 +1,58 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod1
+  labels:
+    app: test1
+    env: product
+nodeSelector:
+  gpu: nvidia
+spec:
+  containers:
+    - name: p1c1
+      image: 7143192/pod_basic:latest
+      command: ["/bin/bash", "-c", "/home/testserver"]
+      args:
+      workingDir: /
+      volumeMounts:
+        - name: pod1_vol
+          mountPath: /volume
+      ports:
+        - name: port1
+          containerPort: 90
+          # hostPort: 10090
+          protocol: TCP
+      # memory format: xxxKB / xxxMB / xxxGB
+      # mini limit for memory is 4MB.
+      resources:
+        limits:
+          cpu: 100m
+          memory: 64MB
+        requests:
+          cpu: 100m
+          memory: 64MB
+    - name: p1c2
+      image: busybox:latest
+      command:
+      args:
+      workingDir:
+      volumeMounts:
+        - name: pod1_vol
+          mountPath: /volume
+      ports:
+        - name: port2
+          containerPort: 100
+          # hostPort: 7070
+          protocol: TCP
+      # memory format: xxxKB / xxxMB / xxxGB
+      # mini limit for memory is 4MB.
+      resources:
+        limits:
+          cpu: 100m
+          memory: 64MB
+        requests:
+          cpu: 100m
+          memory: 64MB
+  volumes:
+    - name: pod1_vol
+      hostPath: /home/working

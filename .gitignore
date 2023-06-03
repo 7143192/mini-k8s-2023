@@ -1,0 +1,16 @@
+# ignore all files
+*
+# do not ignore files with type.
+!*.*
+# do not ignore directories.
+!*/
+
+**/.idea/
+
+.idea
+
+!Jenkinsfile
+
+!Dockerfile
+
+!Makefile

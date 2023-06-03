@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  # character "/" is not allowed in the metadata.Name !!!
+  # but character "_", "-" should be allowed.
+  name: pod3
+  labels:
+    app: test3
+    env: product
+nodeSelector:
+  gpu: nvidia

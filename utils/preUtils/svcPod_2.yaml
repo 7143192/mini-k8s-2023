@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  # character "/" is not allowed in the metadata.Name !!!
+  # but character "_", "-" should be allowed.
+  name: svcPod2
+  labels:
+    app: test2
+    env: release
+nodeSelector:
+  gpu: nvidia
+
+spec:
+  containers:
+    - name: c1
+      image: nginx:latest
+      command:
+      args:
+      workingDir: /
+      volumeMounts:
+        - name: svc_pod2_vol
+          mountPath: /volume
+
+      ports:
+        - name: port1
+          containerPort: 111
+          # hostPort: 11000
+          protocol: TCP
+
+      # memory format: xxxKB / xxxMB / xxxGB
+      # mini limit for memory is 4MB.
+      resources:
+        limits:
+          cpu: 100m
+          memory: 64MB
+        requests:
+          cpu: 100m
+          memory: 64MB
+
+  volumes:
+    - name: svc_pod2_vol
+      hostPath: /home/working1

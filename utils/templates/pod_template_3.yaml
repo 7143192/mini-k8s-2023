@@ -1,0 +1,43 @@
+# support microCPU.
+apiVersion: v1
+kind: Pod
+metadata:
+  # character "/" is not allowed in the metadata.Name !!!
+  # but character "_", "-" should be allowed.
+  name: ssss
+  labels:
+    app: test4
+    env: product
+nodeSelector:
+  gpu: nvidia
+
+spec:
+  containers:
+    - name: eeee
+      image: busybox:latest
+      command:
+      args:
+      workingDir: /home/os/Desktop/working2
+      volumeMounts:
+        - name: cc
+          mountPath: ccc
+
+      ports:
+        - name: f
+          containerPort: 111
+          # hostPort: 11000
+          protocol: TCP
+
+      # memory format: xxxKB / xxxMB / xxxGB
+      # mini limit for memory is 4MB.
+      resources:
+        limits:
+          cpu: 100m
+          memory: 64MB
+        requests:
+          cpu: 100m
+          memory: 64MB
+
+  volumes:
+    - name: v1
+      hostPath: /home/os/Desktop/volume2
